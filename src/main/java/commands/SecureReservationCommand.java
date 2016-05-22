@@ -1,4 +1,4 @@
 package commands;
 
-public class SecureReservationCommand {
+public class SecureReservationCommand extends Command {
 }
