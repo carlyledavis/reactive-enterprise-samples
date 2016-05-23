@@ -9,7 +9,7 @@ import reservation.ReservationManager;
 
 import javax.inject.Inject;
 
-public class SynchronousProcessor {
+public class ProceduralProcessor {
 
     PaymentProcessor payments;
     MessagingProvider messaging;
@@ -17,10 +17,10 @@ public class SynchronousProcessor {
     FlightInventory flightInventory;
 
     @Inject
-    public SynchronousProcessor( PaymentProcessor payments,
-                                 MessagingProvider messaging,
-                                 ReservationManager reservations,
-                                 FlightInventory flightInventory ){
+    public ProceduralProcessor(PaymentProcessor payments,
+                               MessagingProvider messaging,
+                               ReservationManager reservations,
+                               FlightInventory flightInventory ){
         this.payments = payments;
         this.messaging = messaging;
         this.reservations = reservations;
@@ -29,11 +29,10 @@ public class SynchronousProcessor {
 
     //In process execution of the defined flow
     public void processReservation( Itinerary draft,
-                                    double travelCost,
                                     SeatSelection seatSelection,
                                     FundingSource fundingSource,
                                     EmailAddress emailAddress ){
-        PaymentConfirmation paymentConfirmation = payments.secureFunds(travelCost, fundingSource);
+        PaymentConfirmation paymentConfirmation = payments.secureFunds(draft, fundingSource);
         Reservation reservation = reservations.purchaseTicket(draft, paymentConfirmation, seatSelection);
         Flight flight = flightInventory.getFlight(draft.getFlightIdentifier());
         SeatSelection confirmedSeat = flight.reserveSeat(seatSelection);

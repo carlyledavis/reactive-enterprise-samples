@@ -10,13 +10,13 @@ import reservation.MessageDrivenReservationManager;
 
 import javax.inject.Inject;
 
-public class AsynchronousProcessor {
+public class ReactiveProcessor {
 
     private final CommandBus commandBus;
     private final EventBus eventBus;
 
     @Inject
-    public AsynchronousProcessor(CommandBus commandBus, EventBus eventBus ){
+    public ReactiveProcessor(CommandBus commandBus, EventBus eventBus ){
         this.commandBus = commandBus;
         this.eventBus = eventBus;
         wireEventHandlers( eventBus );
