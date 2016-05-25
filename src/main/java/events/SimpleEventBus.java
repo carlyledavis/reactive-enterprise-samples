@@ -10,7 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class SimpleEventBus implements EventBus {
 
-    Map<Class, List<EventDriven>> listeners = new HashMap();
+    private Map<Class, List<EventDriven>> listeners = new HashMap();
 
     public void register(Class clazz, EventDriven eventDriven ) {
         if( !listeners.containsKey(clazz)) {
@@ -30,17 +30,11 @@ public class SimpleEventBus implements EventBus {
     }
 
     //Quick and ugly, should change this to annotation.
-    void execute(Object e, EventDriven handler ){
+    private void execute(Object e, EventDriven handler){
         try {
             Method method = handler.getClass().getDeclaredMethod( "on", e.getClass());
             method.invoke(handler, e);
-        } catch (NoSuchMethodException e1) {
-            e1.printStackTrace();
-        } catch (InvocationTargetException e1) {
-            e1.printStackTrace();
-        } catch (IllegalAccessException e1) {
-            e1.printStackTrace();
-        }
+        } catch (Exception e1) {}
 
     }
 }
