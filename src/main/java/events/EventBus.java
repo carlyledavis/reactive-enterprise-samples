@@ -1,3 +1,7 @@
 package events;
 
-public class EventBus {}
+import java.util.concurrent.Callable;
+
+public interface EventBus {
+    void register(Class clazz, Callable callable );
+}
