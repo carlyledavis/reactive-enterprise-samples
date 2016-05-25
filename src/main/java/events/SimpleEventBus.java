@@ -1,6 +1,7 @@
 package events;
 
+import java.util.concurrent.Callable;
+
 public class SimpleEventBus implements EventBus {
-    @Override
-    public void register(Class clazz, EventDriven component ) { }
+    public void register(Class clazz, Callable callable) { }
 }

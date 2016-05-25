@@ -5,6 +5,7 @@ import commands.CommandBus;
 import events.EventBus;
 import messaging.MessageDrivenMessagingProvider;
 import payments.MessageDrivenPaymentProcessor;
+import payments.PaymentProcessor;
 import reservation.MessageDrivenFlightInventory;
 import reservation.MessageDrivenReservationManager;
 
