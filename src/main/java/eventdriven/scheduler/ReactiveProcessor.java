@@ -1,12 +1,12 @@
-package scheduler;
+package eventdriven.scheduler;
 
-import commands.Command;
-import commands.CommandBus;
+import eventdriven.commands.Command;
+import eventdriven.commands.CommandBus;
 import events.EventBus;
-import messaging.MessageDrivenEmailCommunicationProvider;
-import payments.MessageDrivenPaymentProcessor;
-import reservation.MessageDrivenFlightInventory;
-import reservation.MessageDrivenReservationManager;
+import eventdriven.messaging.MessageDrivenEmailCommunicationProvider;
+import eventdriven.payments.MessageDrivenPaymentProcessor;
+import eventdriven.reservation.MessageDrivenFlightInventory;
+import eventdriven.reservation.MessageDrivenReservationManager;
 
 import javax.inject.Inject;
 

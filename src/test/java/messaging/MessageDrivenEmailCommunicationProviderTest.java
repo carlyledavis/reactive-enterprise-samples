@@ -1,5 +1,6 @@
 package messaging;
 
+import eventdriven.messaging.MessageDrivenEmailCommunicationProvider;
 import events.EventBus;
 import events.SimpleEventBus;
 import org.junit.Test;

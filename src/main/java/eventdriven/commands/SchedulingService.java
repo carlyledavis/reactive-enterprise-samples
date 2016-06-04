@@ -1,4 +1,4 @@
-package commands;
+package eventdriven.commands;
 
 import events.EventBus;
 import reservation.events.ReservationCreatedEvent;

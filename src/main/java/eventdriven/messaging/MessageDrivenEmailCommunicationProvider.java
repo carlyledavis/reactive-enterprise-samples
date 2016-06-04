@@ -1,7 +1,8 @@
-package messaging;
+package eventdriven.messaging;
 
 import events.EventBus;
 import events.EventDriven;
+import messaging.EmailCommunicationProvider;
 import reservation.events.ReservationFulfilfiledEvent;
 
 public class MessageDrivenEmailCommunicationProvider extends EmailCommunicationProvider implements EventDriven {

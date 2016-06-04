@@ -67,7 +67,7 @@ public class ProceduralProcessorTest {
         assertThat( purchase.getReservation()).isEqualTo( reservation );
         assertThat( purchase.getConfirmedSeat()).isEqualTo(confirmedSeat);
         assertThat( purchase.getPaymentConfirmation()).isEqualTo(paymentConfirmation);
-        
+
         verify(emailCommunicationProvider).sendEmail(purchase);
     }
 
