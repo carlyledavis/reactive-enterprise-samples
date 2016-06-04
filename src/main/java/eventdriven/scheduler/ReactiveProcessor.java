@@ -2,8 +2,8 @@ package eventdriven.scheduler;
 
 import eventdriven.commands.Command;
 import eventdriven.commands.CommandBus;
-import events.EventBus;
-import eventdriven.messaging.MessageDrivenEmailCommunicationProvider;
+import eventdriven.events.EventBus;
+import eventdriven.email.MessageDrivenEmailCommunicationProvider;
 import eventdriven.payments.MessageDrivenPaymentProcessor;
 import eventdriven.reservation.MessageDrivenFlightInventory;
 import eventdriven.reservation.MessageDrivenReservationManager;

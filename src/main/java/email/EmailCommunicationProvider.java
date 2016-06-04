@@ -1,4 +1,4 @@
-package messaging;
+package email;
 
 import models.EmailConfirmation;
 import payments.PurchaseConfirmation;

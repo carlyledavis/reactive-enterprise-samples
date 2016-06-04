@@ -1,8 +1,8 @@
 package messaging;
 
-import eventdriven.messaging.MessageDrivenEmailCommunicationProvider;
-import events.EventBus;
-import events.SimpleEventBus;
+import eventdriven.email.MessageDrivenEmailCommunicationProvider;
+import eventdriven.events.EventBus;
+import eventdriven.events.SimpleEventBus;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import reservation.events.ReservationFulfilfiledEvent;

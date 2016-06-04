@@ -1,4 +1,4 @@
-import messaging.EmailCommunicationProvider;
+import email.EmailCommunicationProvider;
 import models.*;
 import payments.PaymentProcessor;
 import reservation.FlightInventory;

@@ -1,6 +1,6 @@
 package scheduler;
 
-import messaging.EmailCommunicationProvider;
+import email.EmailCommunicationProvider;
 import models.*;
 import payments.PaymentProcessor;
 import payments.PurchaseConfirmation;

@@ -1,7 +1,7 @@
 package eventdriven.payments;
 
-import events.EventBus;
-import events.EventDriven;
+import eventdriven.events.EventBus;
+import eventdriven.events.EventDriven;
 import payments.PaymentProcessor;
 import reservation.events.ReservationCreatedEvent;
 

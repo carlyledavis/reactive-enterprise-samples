@@ -1,7 +1,7 @@
 package eventdriven.reservation;
 
-import events.EventBus;
-import events.EventDriven;
+import eventdriven.events.EventBus;
+import eventdriven.events.EventDriven;
 import reservation.FlightInventory;
 
 public class MessageDrivenFlightInventory extends FlightInventory implements EventDriven{

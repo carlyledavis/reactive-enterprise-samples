@@ -1,4 +1,4 @@
-package events;
+package eventdriven.events;
 
 public interface EventBus {
     void register(Class clazz, EventDriven eventDriven);

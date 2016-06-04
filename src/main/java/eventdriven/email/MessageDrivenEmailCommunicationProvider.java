@@ -1,8 +1,8 @@
-package eventdriven.messaging;
+package eventdriven.email;
 
-import events.EventBus;
-import events.EventDriven;
-import messaging.EmailCommunicationProvider;
+import eventdriven.events.EventBus;
+import eventdriven.events.EventDriven;
+import email.EmailCommunicationProvider;
 import reservation.events.ReservationFulfilfiledEvent;
 
 public class MessageDrivenEmailCommunicationProvider extends EmailCommunicationProvider implements EventDriven {

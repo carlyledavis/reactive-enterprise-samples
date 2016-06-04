@@ -1,4 +1,4 @@
-package events;
+package eventdriven.events;
 
 import org.junit.Test;
 

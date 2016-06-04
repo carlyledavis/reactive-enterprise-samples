@@ -1,6 +1,6 @@
 package eventdriven.commands;
 
-import events.EventBus;
+import eventdriven.events.EventBus;
 import reservation.events.ReservationCreatedEvent;
 
 import javax.inject.Inject;

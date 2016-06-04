@@ -1,4 +1,4 @@
-package events.trigger;
+package eventdriven.events.trigger;
 
 public @interface MessageDriven {
 }

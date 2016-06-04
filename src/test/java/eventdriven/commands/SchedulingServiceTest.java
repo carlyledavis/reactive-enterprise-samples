@@ -1,6 +1,6 @@
 package eventdriven.commands;
 
-import events.EventBus;
+import eventdriven.events.EventBus;
 import models.PaymentInformation;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
