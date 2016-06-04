@@ -1,4 +1,6 @@
 import email.EmailCommunicationProvider;
+import email.EmailServer;
+import email.models.Email;
 import models.*;
 import payments.PaymentProcessor;
 import reservation.FlightInventory;
@@ -9,6 +11,8 @@ public class Application {
 
     //In process execution of the defined flow
     public static void main(String... args ){
+        EmailServer server = email -> { };
+
         double travelCost = 150.00;
         SeatSelection seatSelection = new SeatSelection( "15F" );
 
@@ -17,7 +21,7 @@ public class Application {
         EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("fake-email@email.com" ));
 
         ProceduralProcessor proceduralProcessor = new ProceduralProcessor( new PaymentProcessor(),
-                new EmailCommunicationProvider(),
+                new EmailCommunicationProvider(server),
                 new ReservationManager(),
                 new FlightInventory() );
         proceduralProcessor.processReservation( null, null, null, null );

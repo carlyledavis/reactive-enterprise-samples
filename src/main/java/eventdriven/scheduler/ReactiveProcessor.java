@@ -1,5 +1,7 @@
 package eventdriven.scheduler;
 
+import email.EmailServer;
+import email.models.Email;
 import eventdriven.commands.Command;
 import eventdriven.commands.CommandBus;
 import eventdriven.events.EventBus;
@@ -23,7 +25,7 @@ public class ReactiveProcessor {
     }
 
     private void wireEventHandlers(EventBus eventBus) {
-        new MessageDrivenEmailCommunicationProvider(eventBus).subscribeTo(eventBus);
+        new MessageDrivenEmailCommunicationProvider(eventBus, email -> { }).subscribeTo(eventBus);
         new MessageDrivenReservationManager().subscribeTo(eventBus);
         new MessageDrivenFlightInventory().subscribeTo(eventBus);
         new MessageDrivenPaymentProcessor().subscribeTo(eventBus);
