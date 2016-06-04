@@ -3,6 +3,7 @@ package scheduler;
 import messaging.MessagingProvider;
 import models.*;
 import payments.PaymentProcessor;
+import payments.PurchaseConfirmation;
 import reservation.Flight;
 import reservation.FlightInventory;
 import reservation.ReservationManager;
@@ -28,15 +29,16 @@ public class ProceduralProcessor {
     }
 
     //In process execution of the defined flow
-    public void processReservation( Itinerary draft,
-                                    SeatSelection seatSelection,
-                                    PaymentInformation paymentInformation,
-                                    EmailAddress emailAddress ){
+    public PurchaseConfirmation processReservation(Itinerary draft,
+                                                   SeatSelection seatSelection,
+                                                   PaymentInformation paymentInformation,
+                                                   EmailAddress emailAddress ){
         PaymentConfirmation paymentConfirmation = payments.secureFunds(draft, paymentInformation);
         Reservation reservation = reservations.createItinerary(draft, paymentConfirmation, seatSelection);
         Flight flight = flightInventory.getFlight(draft.getFlightIdentifier());
         SeatSelection confirmedSeat = flight.selectSeat(seatSelection);
-        EmailConfirmation logEmail = messaging.sendEmailConfirmation(reservation, emailAddress);
+//        EmailConfirmation logEmail = messaging.sendEmailConfirmation(reservation);
+        return new PurchaseConfirmation( paymentConfirmation, reservation, flight, confirmedSeat );
     }
 
 }

@@ -1,4 +1,9 @@
+import messaging.MessagingProvider;
 import models.*;
+import payments.PaymentProcessor;
+import reservation.FlightInventory;
+import reservation.ReservationManager;
+import scheduler.ProceduralProcessor;
 
 public class Application {
 
@@ -9,7 +14,13 @@ public class Application {
 
         PaymentConfirmation paymentConfirmation = secureFunds(travelCost, new PaymentInformation());
         Reservation reservation = createItinerary(new Itinerary("PHL", "LAS"), paymentConfirmation, seatSelection);
-        EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("cdavis@thoughtworks.com" ));
+        EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("fake-email@email.com" ));
+
+        ProceduralProcessor proceduralProcessor = new ProceduralProcessor( new PaymentProcessor(),
+                new MessagingProvider(),
+                new ReservationManager(),
+                new FlightInventory() );
+        proceduralProcessor.processReservation( null, null, null, null );
     }
 
     private static PaymentConfirmation secureFunds(double cost, PaymentInformation paymentInformation) {

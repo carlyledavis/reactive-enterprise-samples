@@ -1,11 +1,10 @@
 package messaging;
 
-import models.EmailAddress;
 import models.EmailConfirmation;
-import models.Reservation;
+import payments.PurchaseConfirmation;
 
 public class MessagingProvider {
-    public EmailConfirmation sendEmailConfirmation(Reservation reservation, EmailAddress emailAddress) {
+    public EmailConfirmation sendEmailConfirmation(PurchaseConfirmation purchaseConfirmation) {
         return null;
     }
 }
