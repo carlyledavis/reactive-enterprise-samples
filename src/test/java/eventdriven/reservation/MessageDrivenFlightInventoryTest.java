@@ -33,8 +33,7 @@ public class MessageDrivenFlightInventoryTest {
         seatSelection = new SeatSelection("15F");
         flightId = randomUUID();
 
-        reservation = new Reservation(new Itinerary("BDL", "LAS", flightId),
-                seatSelection);
+        reservation = new Reservation(new Itinerary(flightId), seatSelection);
         flights = newArrayList();
         flight = mock(Flight.class);
         when(flight.getId()).thenReturn(flightId);

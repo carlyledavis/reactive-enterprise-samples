@@ -18,7 +18,7 @@ public class Application {
         SeatSelection seatSelection = new SeatSelection( "15F" );
 
         PaymentConfirmation paymentConfirmation = secureFunds(travelCost, new PaymentInformation());
-        Reservation reservation = createItinerary(new Itinerary("PHL", "LAS", null), paymentConfirmation, seatSelection);
+        Reservation reservation = createItinerary(new Itinerary(null), paymentConfirmation, seatSelection);
         EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("fake-email@email.com" ));
 
         ProceduralProcessor proceduralProcessor = new ProceduralProcessor( new PaymentProcessor(),

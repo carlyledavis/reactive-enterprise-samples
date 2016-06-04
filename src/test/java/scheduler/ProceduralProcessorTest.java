@@ -43,7 +43,7 @@ public class ProceduralProcessorTest {
                 reservationManager,
                 flightInventory);
 
-        draftItinerary = new Itinerary("BDL", "LAS", null);
+        draftItinerary = new Itinerary(null);
         seatSelection = new SeatSelection("15F");
         paymentInformation = new PaymentInformation();
         emailAddress = new EmailAddress("fake-email@email.com");

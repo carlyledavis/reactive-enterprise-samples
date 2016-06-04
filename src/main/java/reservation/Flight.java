@@ -7,4 +7,6 @@ import java.util.UUID;
 public interface Flight {
     SeatSelection selectSeat(SeatSelection seatSelection);
     UUID getId();
+    String getSource();
+    String getDestination();
 }
