@@ -2,8 +2,9 @@ package reservation;
 
 import models.SeatSelection;
 
-public class Flight {
-    public SeatSelection selectSeat(SeatSelection seatSelection) {
-        return null;
-    }
+import java.util.UUID;
+
+public interface Flight {
+    SeatSelection selectSeat(SeatSelection seatSelection);
+    UUID getId();
 }

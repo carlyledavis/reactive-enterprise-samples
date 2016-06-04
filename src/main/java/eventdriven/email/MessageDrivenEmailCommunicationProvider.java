@@ -8,9 +8,8 @@ import reservation.events.ReservationFulfilledEvent;
 
 public class MessageDrivenEmailCommunicationProvider extends EmailCommunicationProvider implements EventDriven {
 
-    public MessageDrivenEmailCommunicationProvider(EventBus eventBus, EmailServer emailServer) {
+    public MessageDrivenEmailCommunicationProvider(EmailServer emailServer) {
         super(emailServer);
-        subscribeTo(eventBus);
     }
 
     public void subscribeTo(EventBus eventBus) {

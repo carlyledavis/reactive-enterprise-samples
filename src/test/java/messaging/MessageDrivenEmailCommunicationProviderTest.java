@@ -25,7 +25,7 @@ public class MessageDrivenEmailCommunicationProviderTest {
 
     @Test
     public void shouldSendOutConfirmationEmail(){
-        MessageDrivenEmailCommunicationProvider provider = new MessageDrivenEmailCommunicationProvider(eventBus, emailServer );
+        MessageDrivenEmailCommunicationProvider provider = new MessageDrivenEmailCommunicationProvider(emailServer );
         provider.on( new ReservationFulfilledEvent());
 
         verify(emailServer).send(any());
@@ -33,7 +33,7 @@ public class MessageDrivenEmailCommunicationProviderTest {
 
     @Test
     public void shouldSendOutConfirmationEmailWhenReservationIsConfirmedViaEvent(){
-        new MessageDrivenEmailCommunicationProvider(eventBus, emailServer);
+        new MessageDrivenEmailCommunicationProvider(emailServer).subscribeTo(eventBus);
 
         ReservationFulfilledEvent event = new ReservationFulfilledEvent();
         eventBus.publish(event);

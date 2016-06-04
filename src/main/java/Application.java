@@ -1,11 +1,12 @@
 import email.EmailCommunicationProvider;
 import email.EmailServer;
-import email.models.Email;
 import models.*;
 import payments.PaymentProcessor;
 import reservation.FlightInventory;
 import reservation.ReservationManager;
 import scheduler.ProceduralProcessor;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class Application {
 
@@ -17,13 +18,13 @@ public class Application {
         SeatSelection seatSelection = new SeatSelection( "15F" );
 
         PaymentConfirmation paymentConfirmation = secureFunds(travelCost, new PaymentInformation());
-        Reservation reservation = createItinerary(new Itinerary("PHL", "LAS"), paymentConfirmation, seatSelection);
+        Reservation reservation = createItinerary(new Itinerary("PHL", "LAS", null), paymentConfirmation, seatSelection);
         EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("fake-email@email.com" ));
 
         ProceduralProcessor proceduralProcessor = new ProceduralProcessor( new PaymentProcessor(),
                 new EmailCommunicationProvider(server),
                 new ReservationManager(),
-                new FlightInventory() );
+                new FlightInventory(newArrayList()) );
         proceduralProcessor.processReservation( null, null, null, null );
     }
 
