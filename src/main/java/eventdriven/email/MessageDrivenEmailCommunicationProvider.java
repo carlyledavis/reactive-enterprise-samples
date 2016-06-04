@@ -4,8 +4,7 @@ import email.EmailServer;
 import eventdriven.events.EventBus;
 import eventdriven.events.EventDriven;
 import email.EmailCommunicationProvider;
-import payments.events.PaymentFulfilledEvent;
-import reservation.events.ReservationFulfilfiledEvent;
+import reservation.events.ReservationFulfilledEvent;
 
 public class MessageDrivenEmailCommunicationProvider extends EmailCommunicationProvider implements EventDriven {
 
@@ -15,9 +14,9 @@ public class MessageDrivenEmailCommunicationProvider extends EmailCommunicationP
     }
 
     public void subscribeTo(EventBus eventBus) {
-        eventBus.register( ReservationFulfilfiledEvent.class, this );
+        eventBus.register( ReservationFulfilledEvent.class, this );
     }
-    public void on(ReservationFulfilfiledEvent event) {
+    public void on(ReservationFulfilledEvent event) {
         super.sendEmail(null);
     }
 }
