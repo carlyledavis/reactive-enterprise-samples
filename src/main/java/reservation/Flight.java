@@ -3,7 +3,7 @@ package reservation;
 import models.SeatSelection;
 
 public class Flight {
-    public SeatSelection reserveSeat(SeatSelection seatSelection) {
+    public SeatSelection selectSeat(SeatSelection seatSelection) {
         return null;
     }
 }

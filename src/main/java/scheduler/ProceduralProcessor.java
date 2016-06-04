@@ -30,12 +30,12 @@ public class ProceduralProcessor {
     //In process execution of the defined flow
     public void processReservation( Itinerary draft,
                                     SeatSelection seatSelection,
-                                    FundingSource fundingSource,
+                                    PaymentInformation paymentInformation,
                                     EmailAddress emailAddress ){
-        PaymentConfirmation paymentConfirmation = payments.secureFunds(draft, fundingSource);
-        Reservation reservation = reservations.purchaseTicket(draft, paymentConfirmation, seatSelection);
+        PaymentConfirmation paymentConfirmation = payments.secureFunds(draft, paymentInformation);
+        Reservation reservation = reservations.createItinerary(draft, paymentConfirmation, seatSelection);
         Flight flight = flightInventory.getFlight(draft.getFlightIdentifier());
-        SeatSelection confirmedSeat = flight.reserveSeat(seatSelection);
+        SeatSelection confirmedSeat = flight.selectSeat(seatSelection);
         EmailConfirmation logEmail = messaging.sendEmailConfirmation(reservation, emailAddress);
     }
 

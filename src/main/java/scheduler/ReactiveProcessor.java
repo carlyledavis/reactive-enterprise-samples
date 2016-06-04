@@ -24,7 +24,7 @@ public class ReactiveProcessor {
     }
 
     private void wireEventHandlers(EventBus eventBus) {
-        new MessageDrivenMessagingProvider().subscribeTo(eventBus);
+        new MessageDrivenMessagingProvider(eventBus).subscribeTo(eventBus);
         new MessageDrivenReservationManager().subscribeTo(eventBus);
         new MessageDrivenFlightInventory().subscribeTo(eventBus);
         new MessageDrivenPaymentProcessor().subscribeTo(eventBus);
