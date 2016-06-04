@@ -1,4 +1,4 @@
-import messaging.MessagingProvider;
+import messaging.EmailCommunicationProvider;
 import models.*;
 import payments.PaymentProcessor;
 import reservation.FlightInventory;
@@ -17,7 +17,7 @@ public class Application {
         EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("fake-email@email.com" ));
 
         ProceduralProcessor proceduralProcessor = new ProceduralProcessor( new PaymentProcessor(),
-                new MessagingProvider(),
+                new EmailCommunicationProvider(),
                 new ReservationManager(),
                 new FlightInventory() );
         proceduralProcessor.processReservation( null, null, null, null );

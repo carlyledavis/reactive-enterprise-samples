@@ -1,6 +1,6 @@
 package scheduler;
 
-import messaging.MessagingProvider;
+import messaging.EmailCommunicationProvider;
 import models.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +16,7 @@ import reservation.ReservationManager;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,7 +25,7 @@ public class ProceduralProcessorTest {
     @Mock
     private PaymentProcessor paymentProcessor;
     @Mock
-    private MessagingProvider messagingProvider;
+    private EmailCommunicationProvider emailCommunicationProvider;
     @Mock
     private ReservationManager reservationManager;
     @Mock
@@ -38,7 +39,7 @@ public class ProceduralProcessorTest {
     @Before
     public void setUp() throws Exception {
         processor = new ProceduralProcessor(paymentProcessor,
-                messagingProvider,
+                emailCommunicationProvider,
                 reservationManager,
                 flightInventory);
 
@@ -66,8 +67,8 @@ public class ProceduralProcessorTest {
         assertThat( purchase.getReservation()).isEqualTo( reservation );
         assertThat( purchase.getConfirmedSeat()).isEqualTo(confirmedSeat);
         assertThat( purchase.getPaymentConfirmation()).isEqualTo(paymentConfirmation);
+        
+        verify(emailCommunicationProvider).sendEmail(purchase);
     }
-
-
 
 }

@@ -8,13 +8,13 @@ import reservation.events.ReservationFulfilfiledEvent;
 
 import static org.mockito.Mockito.*;
 
-public class MessageDrivenMessagingProviderTest {
+public class MessageDrivenEmailCommunicationProviderTest {
 
     @Test
     public void shouldSendOutConfirmationEmailWhenReservationIsConfirmed(){
 
         EventBus eventBus = spy(new SimpleEventBus());
-        MessageDrivenMessagingProvider messaging = new MessageDrivenMessagingProvider(eventBus);
+        MessageDrivenEmailCommunicationProvider messaging = new MessageDrivenEmailCommunicationProvider(eventBus);
 
         eventBus.publish( new ReservationFulfilfiledEvent());
         ArgumentCaptor captor = ArgumentCaptor.forClass(Object.class);

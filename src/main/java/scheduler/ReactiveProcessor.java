@@ -3,9 +3,8 @@ package scheduler;
 import commands.Command;
 import commands.CommandBus;
 import events.EventBus;
-import messaging.MessageDrivenMessagingProvider;
+import messaging.MessageDrivenEmailCommunicationProvider;
 import payments.MessageDrivenPaymentProcessor;
-import payments.PaymentProcessor;
 import reservation.MessageDrivenFlightInventory;
 import reservation.MessageDrivenReservationManager;
 
@@ -24,7 +23,7 @@ public class ReactiveProcessor {
     }
 
     private void wireEventHandlers(EventBus eventBus) {
-        new MessageDrivenMessagingProvider(eventBus).subscribeTo(eventBus);
+        new MessageDrivenEmailCommunicationProvider(eventBus).subscribeTo(eventBus);
         new MessageDrivenReservationManager().subscribeTo(eventBus);
         new MessageDrivenFlightInventory().subscribeTo(eventBus);
         new MessageDrivenPaymentProcessor().subscribeTo(eventBus);

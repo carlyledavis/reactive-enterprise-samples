@@ -1,6 +1,6 @@
 package scheduler;
 
-import messaging.MessagingProvider;
+import messaging.EmailCommunicationProvider;
 import models.*;
 import payments.PaymentProcessor;
 import payments.PurchaseConfirmation;
@@ -13,13 +13,13 @@ import javax.inject.Inject;
 public class ProceduralProcessor {
 
     PaymentProcessor payments;
-    MessagingProvider messaging;
+    EmailCommunicationProvider messaging;
     ReservationManager reservations;
     FlightInventory flightInventory;
 
     @Inject
     public ProceduralProcessor(PaymentProcessor payments,
-                               MessagingProvider messaging,
+                               EmailCommunicationProvider messaging,
                                ReservationManager reservations,
                                FlightInventory flightInventory ){
         this.payments = payments;
@@ -37,8 +37,11 @@ public class ProceduralProcessor {
         Reservation reservation = reservations.createItinerary(draft, paymentConfirmation, seatSelection);
         Flight flight = flightInventory.getFlight(draft.getFlightIdentifier());
         SeatSelection confirmedSeat = flight.selectSeat(seatSelection);
-//        EmailConfirmation logEmail = messaging.sendEmailConfirmation(reservation);
-        return new PurchaseConfirmation( paymentConfirmation, reservation, flight, confirmedSeat );
+
+        PurchaseConfirmation purchaseConfirmation = new PurchaseConfirmation(paymentConfirmation, reservation, flight, confirmedSeat);
+        messaging.sendEmail(purchaseConfirmation);
+
+        return purchaseConfirmation;
     }
 
 }

@@ -4,11 +4,11 @@ import events.EventBus;
 import events.EventDriven;
 import reservation.events.ReservationFulfilfiledEvent;
 
-public class MessageDrivenMessagingProvider extends MessagingProvider implements EventDriven {
+public class MessageDrivenEmailCommunicationProvider extends EmailCommunicationProvider implements EventDriven {
 
     private final EventBus eventBus;
 
-    public MessageDrivenMessagingProvider(EventBus eventBus) {
+    public MessageDrivenEmailCommunicationProvider(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
