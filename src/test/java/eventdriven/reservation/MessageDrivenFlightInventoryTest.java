@@ -14,9 +14,7 @@ import java.util.UUID;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static java.util.UUID.randomUUID;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MessageDrivenFlightInventoryTest {
 
@@ -43,11 +41,18 @@ public class MessageDrivenFlightInventoryTest {
 
     @Test
     public void shouldReserveSeatOnFilfilledEvent(){
-
         MessageDrivenFlightInventory flightInventory = new MessageDrivenFlightInventory(flights);
         flightInventory.on( new PaymentFulfilledEvent(reservation));
 
         verify(flight).selectSeat(seatSelection);
+    }
+
+    @Test
+    public void shouldNotRespondIfFlightInventoryNotSubscribed(){
+        eventBus = new SimpleEventBus();
+        eventBus.publish( new PaymentFulfilledEvent( null ));
+
+        verify( flight, never() ).selectSeat(seatSelection );
     }
 
     @Test
