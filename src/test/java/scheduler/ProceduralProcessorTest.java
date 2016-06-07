@@ -59,7 +59,7 @@ public class ProceduralProcessorTest {
         when(paymentProcessor.secureFunds(draftItinerary,paymentInformation)).thenReturn(paymentConfirmation);
         when(flightInventory.getFlight(anyObject())).thenReturn(flight);
         when(flight.selectSeat(seatSelection)).thenReturn(confirmedSeat);
-        when(reservationManager.createItinerary(draftItinerary, paymentConfirmation,seatSelection )).thenReturn(reservation);
+        when(reservationManager.createItinerary(draftItinerary, seatSelection )).thenReturn(reservation);
 
         PurchaseConfirmation purchase = processor.processReservation(draftItinerary,
                 seatSelection, paymentInformation, emailAddress);

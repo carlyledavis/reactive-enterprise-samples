@@ -1,6 +1,7 @@
 package models;
 
-import eventdriven.commands.SecureReservationCommand;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
 public class Reservation {
     private final Itinerary itinerary;
@@ -19,5 +20,16 @@ public class Reservation {
 
     public SeatSelection getSeatSelection() {
         return seatSelection;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return reflectionEquals(this, obj );
     }
 }

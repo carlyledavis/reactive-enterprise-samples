@@ -2,6 +2,7 @@ import email.EmailCommunicationProvider;
 import email.EmailServer;
 import models.*;
 import payments.PaymentProcessor;
+import reservation.Airline;
 import reservation.FlightInventory;
 import reservation.ReservationManager;
 import scheduler.ProceduralProcessor;
@@ -23,7 +24,8 @@ public class Application {
 
         ProceduralProcessor proceduralProcessor = new ProceduralProcessor( new PaymentProcessor(),
                 new EmailCommunicationProvider(server),
-                new ReservationManager(),
+                //Replace with actual airline implementation.
+                new ReservationManager((itinerary, seatSelection1) -> null),
                 new FlightInventory(newArrayList()) );
         proceduralProcessor.processReservation( null, null, null, null );
     }

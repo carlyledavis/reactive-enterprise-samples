@@ -8,6 +8,10 @@ import eventdriven.events.EventDriven;
 import eventdriven.payments.MessageDrivenPaymentProcessor;
 import eventdriven.reservation.MessageDrivenFlightInventory;
 import eventdriven.reservation.MessageDrivenReservationManager;
+import models.Itinerary;
+import models.Reservation;
+import models.SeatSelection;
+import reservation.Airline;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -29,7 +33,7 @@ public class ReactiveProcessor {
     private void wireEventHandlers(EventBus eventBus) {
         Arrays.asList(new MessageDrivenEmailCommunicationProvider(email -> { }),
                 new MessageDrivenFlightInventory(newArrayList()),
-                new MessageDrivenReservationManager(),
+                new MessageDrivenReservationManager((itinerary, seatSelection) -> null),
                 new MessageDrivenPaymentProcessor())
                     .forEach(x->x.subscribeTo(eventBus));
     }
