@@ -1,6 +1,5 @@
 package eventdriven.scheduler;
 
-import com.sun.org.apache.xpath.internal.Arg;
 import eventdriven.commands.SchedulingService;
 import eventdriven.commands.SecureReservationCommand;
 import eventdriven.email.MessageDrivenEmailCommunicationProvider;
