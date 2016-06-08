@@ -5,9 +5,11 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 
 public class Reservation {
     private final Itinerary itinerary;
+    private SeatSelection confirmedSeat;
 
-    public Reservation(Itinerary itinerary) {
+    public Reservation(Itinerary itinerary, SeatSelection confirmedSeat) {
         this.itinerary = itinerary;
+        this.confirmedSeat = confirmedSeat;
     }
 
     public Itinerary getItinerary() {
@@ -22,5 +24,9 @@ public class Reservation {
     @Override
     public boolean equals(Object obj) {
         return reflectionEquals(this, obj );
+    }
+
+    public SeatSelection getConfirmedSeat() {
+        return confirmedSeat;
     }
 }

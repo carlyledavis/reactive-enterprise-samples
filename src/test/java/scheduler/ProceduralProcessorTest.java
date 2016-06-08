@@ -55,7 +55,7 @@ public class ProceduralProcessorTest {
     @Test
     public void shouldResolveAPurchaseConfirmation(){
         SeatSelection confirmedSeat = new SeatSelection(seatSelection.getSeat(), true);
-        Reservation reservation = mock(Reservation.class);
+        Reservation reservation = new Reservation(null, confirmedSeat);
         PaymentConfirmation paymentConfirmation = mock(PaymentConfirmation.class);
         Flight flight = mock(Flight.class);
 
@@ -68,7 +68,7 @@ public class ProceduralProcessorTest {
                 seatSelection, paymentInformation, emailAddress);
 
         assertThat( purchase.getReservation()).isEqualTo( reservation );
-        assertThat( purchase.getConfirmedSeat()).isEqualTo(confirmedSeat);
+        assertThat( purchase.getReservation().getConfirmedSeat()).isEqualTo(confirmedSeat);
         assertThat( purchase.getPaymentConfirmation()).isEqualTo(paymentConfirmation);
 
         verify(emailCommunicationProvider).sendEmail(purchase);

@@ -10,9 +10,10 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 public class PaymentFulfilledEvent {
     private PaymentConfirmation confirmation;
     private final Itinerary itinerary;
+    private PaymentConfirmation paymentConfirmation;
 
-    public PaymentFulfilledEvent(PaymentConfirmation confirmation, Itinerary itinerary) {
-        this.confirmation = confirmation;
+    public PaymentFulfilledEvent(PaymentConfirmation paymentConfirmation, Itinerary itinerary) {
+        this.paymentConfirmation = paymentConfirmation;
         this.itinerary = itinerary;
     }
 
@@ -28,5 +29,9 @@ public class PaymentFulfilledEvent {
 
     public Itinerary getItinerary() {
         return itinerary;
+    }
+
+    public PaymentConfirmation getPaymentConfirmation() {
+        return paymentConfirmation;
     }
 }

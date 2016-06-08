@@ -1,5 +1,8 @@
 package reservation;
 
+import eventdriven.reservation.CustomerTicketConfirmation;
+import models.Itinerary;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -15,5 +18,10 @@ public class FlightInventory {
                 .filter(x->x.getId().equals(flightIdentifier))
                 .findFirst()
                 .get();
+    }
+
+
+    public CustomerTicketConfirmation purchaseTicket(Itinerary itinerary) {
+        return getFlight(itinerary.getFlightIdentifier()).purchaseTicket(itinerary);
     }
 }

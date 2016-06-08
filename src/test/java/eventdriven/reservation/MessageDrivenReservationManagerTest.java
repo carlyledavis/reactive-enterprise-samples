@@ -40,7 +40,7 @@ public class MessageDrivenReservationManagerTest {
         Reservation reservation = mock(Reservation.class);
         when(itinerary.getSeatSelection()).thenReturn(seatSelection);
         when(airline.confirmItinerary(any())).thenReturn(reservation);
-        
+
         manager.on( new PaymentFulfilledEvent(confirmation, itinerary));
 
         verify(airline).confirmItinerary(itinerary);

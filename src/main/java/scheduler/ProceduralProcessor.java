@@ -38,7 +38,7 @@ public class ProceduralProcessor {
         Flight flight = flightInventory.getFlight(draft.getFlightIdentifier());
         SeatSelection confirmedSeat = flight.selectSeat(seatSelection);
 
-        PurchaseConfirmation purchaseConfirmation = new PurchaseConfirmation(paymentConfirmation, reservation, flight, confirmedSeat);
+        PurchaseConfirmation purchaseConfirmation = new PurchaseConfirmation(paymentConfirmation, reservation);
         messaging.sendEmail(purchaseConfirmation);
 
         return purchaseConfirmation;

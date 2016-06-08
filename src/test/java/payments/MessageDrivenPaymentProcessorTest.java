@@ -36,7 +36,7 @@ public class MessageDrivenPaymentProcessorTest {
         Bank bank = mock(Bank.class);
         when(bank.secureFunds(any())).thenReturn(paymentConfirmation);
 
-        Reservation reservation = new Reservation(itinerary);
+        Reservation reservation = new Reservation(itinerary, new SeatSelection( "15F", true ));
 
         MessageDrivenPaymentProcessor processor = new MessageDrivenPaymentProcessor(bank);
         processor.subscribeTo(eventBus);

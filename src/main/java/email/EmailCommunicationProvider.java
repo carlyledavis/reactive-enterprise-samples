@@ -1,6 +1,7 @@
 package email;
 
 import email.models.Email;
+import eventdriven.events.ItineraryConfirmedEvent;
 import models.EmailConfirmation;
 import payments.PurchaseConfirmation;
 
@@ -19,4 +20,6 @@ public class EmailCommunicationProvider {
     private Email createEmail(PurchaseConfirmation purchaseConfirmation) {
         return null;
     }
+
+
 }

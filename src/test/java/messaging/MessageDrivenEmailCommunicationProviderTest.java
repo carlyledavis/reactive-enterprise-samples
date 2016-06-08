@@ -5,6 +5,9 @@ import email.models.Email;
 import eventdriven.email.MessageDrivenEmailCommunicationProvider;
 import eventdriven.events.EventBus;
 import eventdriven.events.SimpleEventBus;
+import models.PaymentConfirmation;
+import models.Reservation;
+import models.SeatSelection;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -16,17 +19,25 @@ public class MessageDrivenEmailCommunicationProviderTest {
 
     private EmailServer emailServer;
     private EventBus eventBus;
+    private SeatSelection seatSelection;
+    private Reservation reservation;
+    private PaymentConfirmation paymentConfirmation;
+    private ReservationFulfilledEvent event;
 
     @Before
     public void setUp() throws Exception {
         emailServer = mock(EmailServer.class);
         eventBus = new SimpleEventBus();
+        seatSelection = new SeatSelection("15F", true);
+        reservation = mock(Reservation.class);
+        paymentConfirmation = mock(PaymentConfirmation.class);
+        event = new ReservationFulfilledEvent(paymentConfirmation, reservation);
     }
 
     @Test
     public void shouldSendOutConfirmationEmail(){
         MessageDrivenEmailCommunicationProvider provider = new MessageDrivenEmailCommunicationProvider(emailServer );
-        provider.on( new ReservationFulfilledEvent());
+        provider.on(event);
 
         verify(emailServer).send(any());
     }
@@ -35,7 +46,6 @@ public class MessageDrivenEmailCommunicationProviderTest {
     public void shouldSendOutConfirmationEmailWhenReservationIsConfirmedViaEvent(){
         new MessageDrivenEmailCommunicationProvider(emailServer).subscribeTo(eventBus);
 
-        ReservationFulfilledEvent event = new ReservationFulfilledEvent();
         eventBus.publish(event);
 
         ArgumentCaptor<Email> captor = ArgumentCaptor.forClass(Email.class);
@@ -45,7 +55,6 @@ public class MessageDrivenEmailCommunicationProviderTest {
     @Test
     public void shouldNotSendEmailOutIfNoEmailProviderIsListening(){
         EventBus eventBus = new SimpleEventBus();
-        ReservationFulfilledEvent event = new ReservationFulfilledEvent();
         eventBus.publish(event);
 
         ArgumentCaptor<Email> captor = ArgumentCaptor.forClass(Email.class);

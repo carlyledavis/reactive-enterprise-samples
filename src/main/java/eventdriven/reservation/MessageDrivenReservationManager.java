@@ -21,7 +21,7 @@ public class MessageDrivenReservationManager extends ReservationManager implemen
         eventBus.register(PaymentFulfilledEvent.class, this );
     }
 
-    void on( PaymentFulfilledEvent event ){
+    public void on(PaymentFulfilledEvent event){
         eventBus.publish( new ItineraryConfirmedEvent(confirmItinerary( event.getItinerary())));
     }
 }
