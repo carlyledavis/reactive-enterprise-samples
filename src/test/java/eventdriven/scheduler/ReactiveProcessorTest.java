@@ -76,11 +76,9 @@ public class ReactiveProcessorTest {
 
         service.handle( new SecureReservationCommand(itinerary, paymentInformation));
 
-        PaymentFulfilledEvent paymentFulfilledEvent = new PaymentFulfilledEvent(paymentConfirmation, itinerary);
-
-        verify(flightInventory).on(paymentFulfilledEvent);
+        verify(flightInventory).on(new PaymentFulfilledEvent(paymentConfirmation, itinerary));
         verify(flightInventory).on(new TicketPurchasedEvent(paymentConfirmation, itinerary));
-        verify(reservationManager).on(paymentFulfilledEvent);
+        verify(reservationManager).on(new PaymentFulfilledEvent(paymentConfirmation, itinerary));
         verify(paymentProcessor).on(
                 new CustomerTicketPurchaseInitiatedEvent(paymentInformation, itinerary));
 

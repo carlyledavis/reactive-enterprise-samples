@@ -26,6 +26,19 @@ The above code works fine but creates a procedural process that does not reflect
 
 This however moves away from the procedural implementation and starts to dive into a more reactive way of looking at this problem.
 
+Reactive architecture shift the implementation to something that looks more like:
+
+``` Java
+ReactiveProcessor processor = new ReactiveProcessor(eventBus);
+asList(emailCommunicationProvider,
+        flightInventory,
+        reservationManager,
+        paymentProcessor)
+        .forEach(processor::wireEventHandlers);
+
+service.handle( new SecureReservationCommand(itinerary, paymentInformation));
+```
+
 ## How to run
 
 The code that you are looking at has been primarily created to illustrate design patterns and approaches.  With that said, the easiest way to walk through the execution flow is to look at the two main objects.
