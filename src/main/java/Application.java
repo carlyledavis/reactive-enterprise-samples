@@ -20,14 +20,14 @@ public class Application {
         SeatSelection seatSelection = new SeatSelection( "15F" );
 
         PaymentConfirmation paymentConfirmation = secureFunds(travelCost, new PaymentInformation());
-        Reservation reservation = createItinerary(new Itinerary(null), paymentConfirmation, seatSelection);
+        Reservation reservation = createItinerary(new Itinerary(null, null), paymentConfirmation, seatSelection);
         EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("fake-email@email.com" ));
 
         ProceduralProcessor proceduralProcessor = new ProceduralProcessor(
                 new PaymentProcessor(paymentInformation -> null),
         new EmailCommunicationProvider(server),
                 //Replace with actual airline implementation.
-                new ReservationManager((itinerary, seatSelection1) -> null),
+                new ReservationManager((itinerary) -> null),
                 new FlightInventory(newArrayList()) );
         proceduralProcessor.processReservation( null, null, null, null );
     }

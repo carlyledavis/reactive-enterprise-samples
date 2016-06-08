@@ -1,5 +1,6 @@
 package payments.events;
 
+import models.Itinerary;
 import models.PaymentConfirmation;
 import models.Reservation;
 
@@ -8,15 +9,11 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 
 public class PaymentFulfilledEvent {
     private PaymentConfirmation confirmation;
-    private Reservation reservation;
+    private final Itinerary itinerary;
 
-    public PaymentFulfilledEvent(PaymentConfirmation confirmation, Reservation reservation) {
+    public PaymentFulfilledEvent(PaymentConfirmation confirmation, Itinerary itinerary) {
         this.confirmation = confirmation;
-        this.reservation = reservation;
-    }
-
-    public Reservation getReservation() {
-        return reservation;
+        this.itinerary = itinerary;
     }
 
     @Override
@@ -27,5 +24,9 @@ public class PaymentFulfilledEvent {
     @Override
     public boolean equals(Object obj) {
         return reflectionEquals(this,obj);
+    }
+
+    public Itinerary getItinerary() {
+        return itinerary;
     }
 }

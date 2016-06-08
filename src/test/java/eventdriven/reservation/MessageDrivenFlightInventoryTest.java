@@ -26,6 +26,7 @@ public class MessageDrivenFlightInventoryTest {
     private UUID flightId;
     private Flight flight;
     private PaymentConfirmation confirmation;
+    private Itinerary itinerary;
 
     @Before
     public void setUp() throws Exception {
@@ -33,19 +34,20 @@ public class MessageDrivenFlightInventoryTest {
         seatSelection = new SeatSelection("15F");
         flightId = randomUUID();
 
-        reservation = new Reservation(new Itinerary(flightId), seatSelection);
+        reservation = new Reservation(new Itinerary(flightId, seatSelection));
         flights = newArrayList();
         flight = mock(Flight.class);
         when(flight.getId()).thenReturn(flightId);
 
         flights.add(flight);
         confirmation = mock(PaymentConfirmation.class);
+        itinerary = new Itinerary(flightId, seatSelection );
     }
 
     @Test
     public void shouldReserveSeatOnFilfilledEvent(){
         MessageDrivenFlightInventory flightInventory = new MessageDrivenFlightInventory(flights);
-        flightInventory.on( new PaymentFulfilledEvent(confirmation, reservation));
+        flightInventory.on( new PaymentFulfilledEvent(confirmation, itinerary));
 
         verify(flight).selectSeat(seatSelection);
     }
@@ -61,7 +63,7 @@ public class MessageDrivenFlightInventoryTest {
     @Test
     public void shouldReserveSeatOncePaymentHasBeenConfirmedViaEventWiring(){
         new MessageDrivenFlightInventory(flights).subscribeTo(eventBus);
-        PaymentFulfilledEvent event = new PaymentFulfilledEvent(confirmation, reservation);
+        PaymentFulfilledEvent event = new PaymentFulfilledEvent(confirmation, itinerary);
 
         eventBus.publish(event);
         verify( flight ).selectSeat( seatSelection );

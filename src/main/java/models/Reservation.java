@@ -5,23 +5,14 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 
 public class Reservation {
     private final Itinerary itinerary;
-    private final SeatSelection seatSelection;
 
-
-    public Reservation(Itinerary itinerary, SeatSelection seatSelection) {
-
+    public Reservation(Itinerary itinerary) {
         this.itinerary = itinerary;
-        this.seatSelection = seatSelection;
     }
 
     public Itinerary getItinerary() {
         return itinerary;
     }
-
-    public SeatSelection getSeatSelection() {
-        return seatSelection;
-    }
-
 
     @Override
     public int hashCode() {

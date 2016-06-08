@@ -1,39 +1,19 @@
 package eventdriven.scheduler;
 
-import eventdriven.commands.Command;
-import eventdriven.commands.CommandBus;
-import eventdriven.email.MessageDrivenEmailCommunicationProvider;
 import eventdriven.events.EventBus;
-import eventdriven.payments.MessageDrivenPaymentProcessor;
-import eventdriven.reservation.MessageDrivenFlightInventory;
-import eventdriven.reservation.MessageDrivenReservationManager;
+import eventdriven.events.EventDriven;
 
 import javax.inject.Inject;
-import java.util.Arrays;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 public class ReactiveProcessor {
-
-    private final CommandBus commandBus;
     private final EventBus eventBus;
 
     @Inject
-    public ReactiveProcessor(CommandBus commandBus, EventBus eventBus) {
-        this.commandBus = commandBus;
+    public ReactiveProcessor(EventBus eventBus) {
         this.eventBus = eventBus;
-        wireEventHandlers(eventBus);
     }
 
-    private void wireEventHandlers(EventBus eventBus) {
-        Arrays.asList(new MessageDrivenEmailCommunicationProvider(email -> { }),
-                new MessageDrivenFlightInventory(newArrayList()),
-                new MessageDrivenReservationManager((itinerary, seatSelection) -> null),
-                new MessageDrivenPaymentProcessor(paymentInformation -> null))
-                .forEach(x->x.subscribeTo(eventBus));
-    }
-
-    public void handle(Command command) {
-        commandBus.execute(command);
+    public void wireEventHandlers(EventDriven eventHandler) {
+        eventHandler.subscribeTo(eventBus);
     }
 }

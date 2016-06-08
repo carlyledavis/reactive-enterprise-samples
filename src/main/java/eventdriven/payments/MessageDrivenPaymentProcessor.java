@@ -6,7 +6,7 @@ import models.PaymentConfirmation;
 import payments.Bank;
 import payments.PaymentProcessor;
 import payments.events.PaymentFulfilledEvent;
-import reservation.events.ReservationCreatedEvent;
+import reservation.events.CustomerTicketPurchaseInitiatedEvent;
 
 public class MessageDrivenPaymentProcessor extends PaymentProcessor implements EventDriven{
 
@@ -18,11 +18,11 @@ public class MessageDrivenPaymentProcessor extends PaymentProcessor implements E
 
     public void subscribeTo(EventBus eventBus) {
         this.eventBus = eventBus;
-        eventBus.register( ReservationCreatedEvent.class, this );
+        eventBus.register( CustomerTicketPurchaseInitiatedEvent.class, this );
     }
 
-    public void on( ReservationCreatedEvent event ){
+    public void on( CustomerTicketPurchaseInitiatedEvent event ){
         PaymentConfirmation confirmation = secureFunds( event.getPaymentInformation());
-        eventBus.publish( new PaymentFulfilledEvent(confirmation, event.getReservation()));
+        eventBus.publish( new PaymentFulfilledEvent(confirmation, event.getItinerary()));
     }
 }

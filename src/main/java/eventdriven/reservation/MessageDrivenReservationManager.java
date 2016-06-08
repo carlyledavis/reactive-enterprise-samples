@@ -22,8 +22,6 @@ public class MessageDrivenReservationManager extends ReservationManager implemen
     }
 
     void on( PaymentFulfilledEvent event ){
-        Reservation reservation = event.getReservation();
-        this.createItinerary( reservation.getItinerary(), reservation.getSeatSelection() );
-        eventBus.publish( new ItineraryConfirmedEvent(event.getReservation()));
+        eventBus.publish( new ItineraryConfirmedEvent(confirmItinerary( event.getItinerary())));
     }
 }

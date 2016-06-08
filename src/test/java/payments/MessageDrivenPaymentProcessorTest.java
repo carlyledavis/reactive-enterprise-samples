@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import payments.events.PaymentFulfilledEvent;
-import reservation.events.ReservationCreatedEvent;
+import reservation.events.CustomerTicketPurchaseInitiatedEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
@@ -36,11 +36,11 @@ public class MessageDrivenPaymentProcessorTest {
         Bank bank = mock(Bank.class);
         when(bank.secureFunds(any())).thenReturn(paymentConfirmation);
 
-        Reservation reservation = new Reservation(itinerary, seatSelection);
+        Reservation reservation = new Reservation(itinerary);
 
         MessageDrivenPaymentProcessor processor = new MessageDrivenPaymentProcessor(bank);
         processor.subscribeTo(eventBus);
-        processor.on(new ReservationCreatedEvent(paymentInformation, reservation));
+        processor.on(new CustomerTicketPurchaseInitiatedEvent(paymentInformation, itinerary));
 
         verify(bank).secureFunds(paymentInformation);
         ArgumentCaptor<PaymentFulfilledEvent> captor = ArgumentCaptor.forClass(PaymentFulfilledEvent.class);
@@ -48,7 +48,7 @@ public class MessageDrivenPaymentProcessorTest {
         verify(eventBus).publish(captor.capture());
 
         assertThat(  captor.getValue()).isEqualToComparingFieldByField(
-                new PaymentFulfilledEvent(paymentConfirmation, reservation));
+                new PaymentFulfilledEvent(paymentConfirmation, itinerary));
     }
 
 

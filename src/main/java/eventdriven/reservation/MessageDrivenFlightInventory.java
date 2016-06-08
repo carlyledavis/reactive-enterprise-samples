@@ -2,6 +2,7 @@ package eventdriven.reservation;
 
 import eventdriven.events.EventBus;
 import eventdriven.events.EventDriven;
+import models.Itinerary;
 import models.Reservation;
 import payments.events.PaymentFulfilledEvent;
 import reservation.Flight;
@@ -20,9 +21,10 @@ public class MessageDrivenFlightInventory extends FlightInventory implements Eve
     }
 
     public void on(PaymentFulfilledEvent event) {
-        Reservation reservation = event.getReservation();
-        Flight flight = getFlight(reservation.getItinerary().getFlightIdentifier());
-        flight.selectSeat(reservation.getSeatSelection());
+        Itinerary itinerary = event.getItinerary();
+
+        Flight flight = getFlight(itinerary.getFlightIdentifier());
+        flight.selectSeat(itinerary.getSeatSelection());
 
     }
 }

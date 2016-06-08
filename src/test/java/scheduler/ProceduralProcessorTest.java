@@ -13,6 +13,9 @@ import reservation.Flight;
 import reservation.FlightInventory;
 import reservation.ReservationManager;
 
+import java.util.UUID;
+
+import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
@@ -43,8 +46,8 @@ public class ProceduralProcessorTest {
                 reservationManager,
                 flightInventory);
 
-        draftItinerary = new Itinerary(null);
         seatSelection = new SeatSelection("15F");
+        draftItinerary = new Itinerary(randomUUID(),seatSelection);
         paymentInformation = new PaymentInformation();
         emailAddress = new EmailAddress("fake-email@email.com");
     }
@@ -59,7 +62,7 @@ public class ProceduralProcessorTest {
         when(paymentProcessor.secureFunds(paymentInformation)).thenReturn(paymentConfirmation);
         when(flightInventory.getFlight(anyObject())).thenReturn(flight);
         when(flight.selectSeat(seatSelection)).thenReturn(confirmedSeat);
-        when(reservationManager.createItinerary(draftItinerary, seatSelection )).thenReturn(reservation);
+        when(reservationManager.confirmItinerary(draftItinerary)).thenReturn(reservation);
 
         PurchaseConfirmation purchase = processor.processReservation(draftItinerary,
                 seatSelection, paymentInformation, emailAddress);

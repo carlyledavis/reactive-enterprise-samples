@@ -12,8 +12,9 @@ public class SecureReservationCommand extends Command {
     private Itinerary itinerary;
     private SeatSelection seatSelection;
 
-    public SecureReservationCommand(PaymentInformation paymentInformation) {
+    public SecureReservationCommand(Itinerary itinerary, PaymentInformation paymentInformation) {
         super();
+        this.itinerary = itinerary;
         this.paymentInformation = paymentInformation;
     }
 

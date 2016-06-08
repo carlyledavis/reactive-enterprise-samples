@@ -11,6 +11,7 @@ import org.junit.Test;
 import payments.events.PaymentFulfilledEvent;
 import reservation.Airline;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,12 +38,12 @@ public class MessageDrivenReservationManagerTest {
         manager.subscribeTo(eventBus);
 
         Reservation reservation = mock(Reservation.class);
-        when(reservation.getItinerary()).thenReturn(itinerary);
-        when(reservation.getSeatSelection()).thenReturn(seatSelection);
+        when(itinerary.getSeatSelection()).thenReturn(seatSelection);
+        when(airline.confirmItinerary(any())).thenReturn(reservation);
+        
+        manager.on( new PaymentFulfilledEvent(confirmation, itinerary));
 
-        manager.on( new PaymentFulfilledEvent(confirmation, reservation));
-
-        verify(airline).createItinerary(itinerary, seatSelection);
+        verify(airline).confirmItinerary(itinerary);
         verify(eventBus).publish(new ItineraryConfirmedEvent(reservation));
     }
 

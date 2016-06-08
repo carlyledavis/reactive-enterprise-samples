@@ -16,9 +16,9 @@ public class ReservationManagerTest {
         SeatSelection seatSelection = mock(SeatSelection.class);
 
         ReservationManager manager = new ReservationManager(airline);
-        manager.createItinerary(itinerary,seatSelection);
+        manager.confirmItinerary(itinerary);
 
-        verify( airline ).createItinerary(itinerary,seatSelection);
+        verify( airline ).confirmItinerary(itinerary);
     }
 
 }

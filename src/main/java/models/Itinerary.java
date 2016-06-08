@@ -7,9 +7,11 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 
 public class Itinerary {
     private UUID flightIdentifier;
+    private final SeatSelection seatSelection;
 
-    public Itinerary(UUID flightIdentifier) {
+    public Itinerary(UUID flightIdentifier, SeatSelection seatSelection) {
         this.flightIdentifier = flightIdentifier;
+        this.seatSelection = seatSelection;
     }
 
     public UUID getFlightIdentifier() {
@@ -24,5 +26,9 @@ public class Itinerary {
     @Override
     public boolean equals(Object obj) {
         return reflectionEquals(this, obj );
+    }
+
+    public SeatSelection getSeatSelection() {
+        return seatSelection;
     }
 }
