@@ -2,7 +2,7 @@
 
 Within this document you will find code samples that demonstrate the content that was presented at the Agile Development Conference 2016 in Las Vegas.
 
-![overview](https://raw.githubusercontent.com/carlyledavis/reactive-enterprise-samples/master/img/overview.png)
+![Overview](https://raw.githubusercontent.com/carlyledavis/reactive-enterprise-samples/master/img/overview.png)
 
 [![Build Status](https://snap-ci.com/carlyledavis/reactive-enterprise-samples/branch/master/build_image)](https://snap-ci.com/carlyledavis/reactive-enterprise-samples/branch/master)
 
@@ -48,7 +48,7 @@ The code that you are looking at has been primarily created to illustrate design
 
 As the name would suggest they implement the same problem in either a procedural or reactive way.
 
-For a high level overview of how the system should function you can dive into some of the tests which are meant to help you wake through the code rather than prove its production readiness.
+For a high level overview of how the system should function you can dive into some of the tests, which are meant to help you, walk through the code rather than prove its production readiness.
 
 * ProceduralProcessorTest.java
 * ReactiveProcessorTest.java
