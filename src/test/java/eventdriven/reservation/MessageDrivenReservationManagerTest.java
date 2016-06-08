@@ -3,6 +3,7 @@ package eventdriven.reservation;
 import eventdriven.events.EventBus;
 import eventdriven.events.ItineraryConfirmedEvent;
 import models.Itinerary;
+import models.PaymentConfirmation;
 import models.Reservation;
 import models.SeatSelection;
 import org.junit.Before;
@@ -19,12 +20,14 @@ public class MessageDrivenReservationManagerTest {
     private SeatSelection seatSelection;
     private Itinerary itinerary;
     private EventBus eventBus;
+    private PaymentConfirmation confirmation;
 
     @Before
     public void setUp() throws Exception {
         seatSelection = new SeatSelection("14F");
         itinerary = mock(Itinerary.class);
         eventBus = mock(EventBus.class);
+        confirmation = mock(PaymentConfirmation.class);
     }
 
     @Test
@@ -37,7 +40,7 @@ public class MessageDrivenReservationManagerTest {
         when(reservation.getItinerary()).thenReturn(itinerary);
         when(reservation.getSeatSelection()).thenReturn(seatSelection);
 
-        manager.on( new PaymentFulfilledEvent(reservation));
+        manager.on( new PaymentFulfilledEvent(confirmation, reservation));
 
         verify(airline).createItinerary(itinerary, seatSelection);
         verify(eventBus).publish(new ItineraryConfirmedEvent(reservation));

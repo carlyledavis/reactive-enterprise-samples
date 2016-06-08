@@ -5,7 +5,13 @@ import models.Itinerary;
 import models.PaymentConfirmation;
 
 public class PaymentProcessor {
-    public PaymentConfirmation secureFunds(Itinerary draft, PaymentInformation paymentInformation) {
-        return null;
+    private final Bank bank;
+
+    public PaymentProcessor(Bank bank) {
+        this.bank = bank;
+    }
+
+    public PaymentConfirmation secureFunds(PaymentInformation paymentInformation) {
+        return bank.secureFunds(paymentInformation);
     }
 }

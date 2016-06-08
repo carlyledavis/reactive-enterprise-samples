@@ -1,6 +1,7 @@
 import email.EmailCommunicationProvider;
 import email.EmailServer;
 import models.*;
+import payments.Bank;
 import payments.PaymentProcessor;
 import reservation.Airline;
 import reservation.FlightInventory;
@@ -22,8 +23,9 @@ public class Application {
         Reservation reservation = createItinerary(new Itinerary(null), paymentConfirmation, seatSelection);
         EmailConfirmation logEmail = sendEmail(reservation, new EmailAddress("fake-email@email.com" ));
 
-        ProceduralProcessor proceduralProcessor = new ProceduralProcessor( new PaymentProcessor(),
-                new EmailCommunicationProvider(server),
+        ProceduralProcessor proceduralProcessor = new ProceduralProcessor(
+                new PaymentProcessor(paymentInformation -> null),
+        new EmailCommunicationProvider(server),
                 //Replace with actual airline implementation.
                 new ReservationManager((itinerary, seatSelection1) -> null),
                 new FlightInventory(newArrayList()) );

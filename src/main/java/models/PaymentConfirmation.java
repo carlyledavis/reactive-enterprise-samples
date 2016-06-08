@@ -1,4 +1,4 @@
 package models;
 
-public class PaymentConfirmation {
+public interface PaymentConfirmation {
 }

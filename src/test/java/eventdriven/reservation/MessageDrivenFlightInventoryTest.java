@@ -2,6 +2,7 @@ package eventdriven.reservation;
 
 import eventdriven.events.SimpleEventBus;
 import models.Itinerary;
+import models.PaymentConfirmation;
 import models.Reservation;
 import models.SeatSelection;
 import org.junit.Before;
@@ -24,6 +25,7 @@ public class MessageDrivenFlightInventoryTest {
     private List<Flight> flights;
     private UUID flightId;
     private Flight flight;
+    private PaymentConfirmation confirmation;
 
     @Before
     public void setUp() throws Exception {
@@ -37,12 +39,13 @@ public class MessageDrivenFlightInventoryTest {
         when(flight.getId()).thenReturn(flightId);
 
         flights.add(flight);
+        confirmation = mock(PaymentConfirmation.class);
     }
 
     @Test
     public void shouldReserveSeatOnFilfilledEvent(){
         MessageDrivenFlightInventory flightInventory = new MessageDrivenFlightInventory(flights);
-        flightInventory.on( new PaymentFulfilledEvent(reservation));
+        flightInventory.on( new PaymentFulfilledEvent(confirmation, reservation));
 
         verify(flight).selectSeat(seatSelection);
     }
@@ -50,7 +53,7 @@ public class MessageDrivenFlightInventoryTest {
     @Test
     public void shouldNotRespondIfFlightInventoryNotSubscribed(){
         eventBus = new SimpleEventBus();
-        eventBus.publish( new PaymentFulfilledEvent( null ));
+        eventBus.publish( new PaymentFulfilledEvent(confirmation, null ));
 
         verify( flight, never() ).selectSeat(seatSelection );
     }
@@ -58,7 +61,7 @@ public class MessageDrivenFlightInventoryTest {
     @Test
     public void shouldReserveSeatOncePaymentHasBeenConfirmedViaEventWiring(){
         new MessageDrivenFlightInventory(flights).subscribeTo(eventBus);
-        PaymentFulfilledEvent event = new PaymentFulfilledEvent(reservation);
+        PaymentFulfilledEvent event = new PaymentFulfilledEvent(confirmation, reservation);
 
         eventBus.publish(event);
         verify( flight ).selectSeat( seatSelection );

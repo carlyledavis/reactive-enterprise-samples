@@ -27,7 +27,8 @@ public class SchedulingServiceTest {
 
         ReservationCreatedEvent createdEvent = (ReservationCreatedEvent) captor.getValue();
         assertThat(createdEvent).isNotNull();
-        assertThat(createdEvent.getPaymentInformation()).isSameAs(paymentInformation);
+        assertThat(createdEvent.getPaymentInformation())
+                .isEqualToComparingFieldByField(paymentInformation);
     }
 
 }

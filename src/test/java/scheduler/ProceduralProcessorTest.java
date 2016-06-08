@@ -56,7 +56,7 @@ public class ProceduralProcessorTest {
         PaymentConfirmation paymentConfirmation = mock(PaymentConfirmation.class);
         Flight flight = mock(Flight.class);
 
-        when(paymentProcessor.secureFunds(draftItinerary,paymentInformation)).thenReturn(paymentConfirmation);
+        when(paymentProcessor.secureFunds(paymentInformation)).thenReturn(paymentConfirmation);
         when(flightInventory.getFlight(anyObject())).thenReturn(flight);
         when(flight.selectSeat(seatSelection)).thenReturn(confirmedSeat);
         when(reservationManager.createItinerary(draftItinerary, seatSelection )).thenReturn(reservation);
