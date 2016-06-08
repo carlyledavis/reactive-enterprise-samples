@@ -8,7 +8,7 @@ Within this document you will find code samples that demonstrate the content tha
 
 ## Overview
 
-The example that is used examines the process of purchasing a airline ticket for travel.  In the sequential process you will notice an execution flow like th following:
+The example that is used examines the process of purchasing an airline ticket for travel.  In the sequential process, you will notice an execution flow like the following:
 
 ``` Java
 PaymentConfirmation paymentConfirmation = payments.secureFunds(paymentInformation);
