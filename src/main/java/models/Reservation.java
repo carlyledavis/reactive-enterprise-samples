@@ -29,4 +29,8 @@ public class Reservation {
     public SeatSelection getConfirmedSeat() {
         return confirmedSeat;
     }
+
+    public void setConfirmedSeat(SeatSelection confirmedSeat) {
+        this.confirmedSeat = confirmedSeat;
+    }
 }

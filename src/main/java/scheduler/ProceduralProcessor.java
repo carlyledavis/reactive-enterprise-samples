@@ -36,7 +36,7 @@ public class ProceduralProcessor {
         PaymentConfirmation paymentConfirmation = payments.secureFunds(paymentInformation);
         Reservation reservation = reservations.confirmItinerary(draft);
         Flight flight = flightInventory.getFlight(draft.getFlightIdentifier());
-        SeatSelection confirmedSeat = flight.selectSeat(seatSelection);
+        reservation.setConfirmedSeat(flight.selectSeat(seatSelection));
 
         PurchaseConfirmation purchaseConfirmation = new PurchaseConfirmation(paymentConfirmation, reservation);
         messaging.sendEmail(purchaseConfirmation);
